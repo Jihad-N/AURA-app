@@ -2,6 +2,7 @@ import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/widgets/aura_logo.dart';
 import 'package:ecommerce_project/widgets/custom_button.dart';
+import 'package:ecommerce_project/widgets/custom_icon_btn_outlined.dart';
 import 'package:ecommerce_project/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +84,7 @@ class SignUpScreen extends StatelessWidget {
             Center(
               child: Text('OR JOIN WITH', style: AppTextStyles.labelMedium),
             ),
-
+            CustomIconBtnOutlined(img: 'assets/images/Google-SVG.png'),
             Spacer(flex: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
