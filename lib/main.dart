@@ -1,6 +1,5 @@
-import 'package:ecommerce_project/features/auth/screens/login_screen.dart';
-import 'package:ecommerce_project/features/auth/screens/sign_up_screen.dart';
-import 'package:ecommerce_project/features/splash/screen/splash_screen.dart';
+import 'package:ecommerce_project/core/routes/app_routes.dart';
+import 'package:ecommerce_project/core/routes/route_generator.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,13 +13,8 @@ class JewelryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        'SplashScreen': (context) => SplashScreen(),
-        'LoginScreen': (context) => LoginScreen(),
-        'SignUpScreen': (context) => SignUpScreen(),
-        'JewelryApp': (context) => JewelryApp(),
-      },
-      initialRoute: 'SplashScreen',
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
