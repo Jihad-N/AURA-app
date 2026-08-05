@@ -7,27 +7,30 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.isObsecureText,
     required this.icon,
-    required this.onChanged, this.sufIcon,
+    this.onChanged,
+    this.sufIcon,
+    this.autoValidateMode = AutovalidateMode.onUserInteraction,
+    this.validator, required this.controller,
   });
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
   final String hintText;
   final bool isObsecureText;
   final Icon icon;
-  final Icon ?sufIcon;
-  final Function(String) onChanged;
+  final Icon? sufIcon;
+  final AutovalidateMode? autoValidateMode;
+  final Function(String)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0, top: 4),
       child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'field is required';
-          }
-          return null;
-        },
+        validator: validator,
+        controller: controller,
         onChanged: onChanged,
         obscureText: isObsecureText,
-        // style: mediumBlackText,
+        autovalidateMode: autoValidateMode,
         decoration: InputDecoration(
           prefixIcon: icon,
           suffixIcon: sufIcon,

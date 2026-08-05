@@ -26,6 +26,5 @@ class CustomIconBtnOutlined extends StatelessWidget {
         ),
       ),
     );
-    ();
   }
 }

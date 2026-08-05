@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.fade,
       // backgroundColor: Colors.transparent,
-      nextScreen: const LoginScreen(),
+      nextScreen:  LoginScreen(),
     );
   }
 }

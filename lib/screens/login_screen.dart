@@ -1,5 +1,6 @@
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
+import 'package:ecommerce_project/core/utils/validator.dart';
 import 'package:ecommerce_project/widgets/aura_logo.dart';
 import 'package:ecommerce_project/widgets/custom_btn_outlined.dart';
 import 'package:ecommerce_project/widgets/custom_button.dart';
@@ -7,7 +8,10 @@ import 'package:ecommerce_project/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,82 +57,101 @@ class LoginScreen extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width * 0.80,
                       height: MediaQuery.of(context).size.height * 0.7,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Spacer(),
-                          Text(
-                            'Welcome Back',
-                            style: AppTextStyles.blackHeadingSmall,
-                          ),
-                          Spacer(),
-                          SizedBox(height: 10),
-                          Text('Email', style: AppTextStyles.labelMedium),
-                          CustomTextFormField(
-                            hintText: 'Email Address',
-                            isObsecureText: false,
-                            onChanged: (String p1) {},
-                            icon: Icon(
-                              Icons.email_outlined,
-                              color: AppColors.onBackground,
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Spacer(),
+                            Text(
+                              'Welcome Back',
+                              style: AppTextStyles.blackHeadingSmall,
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Password',
-                                style: AppTextStyles.labelMedium,
+                            Spacer(),
+                            SizedBox(height: 10),
+                            Text('Email', style: AppTextStyles.labelMedium),
+                            CustomTextFormField(
+                              autoValidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              hintText: 'Email Address',
+                              isObsecureText: false,
+                              validator: AppValidators.validateEmail,
+                              icon: Icon(
+                                Icons.email_outlined,
+                                color: AppColors.onBackground,
                               ),
-                              Text(
-                                'Forgot?',
-                                style: AppTextStyles.headlineSmall,
-                              ),
-                            ],
-                          ),
-                          CustomTextFormField(
-                            hintText: 'Email Address',
-                            isObsecureText: false,
-                            onChanged: (String p1) {},
-                            icon: Icon(
-                              Icons.lock_outline_rounded,
-                              color: AppColors.onBackground,
+                              controller: _emailController,
                             ),
-                          ),
-                          CustomButton(txt: 'SIGN IN '),
-                          SizedBox(height: 10),
-                          Center(
-                            child: Text(
-                              'OR CONTINUE WITH',
-                              style: AppTextStyles.bLabelSmall,
-                            ),
-                          ),
-                          CustomBtnOutlined(),
-                          SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'New to Aura? ',
-                                style: AppTextStyles.bodyMedium,
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pushNamed(
-                                  context,
-                                  'SignUpScreen',
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Password',
+                                  style: AppTextStyles.labelMedium,
                                 ),
-                                child: Text(
-                                  'Request Membership ',
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontStyle: FontStyle.italic,
+                                Text(
+                                  'Forgot?',
+                                  style: AppTextStyles.headlineSmall,
+                                ),
+                              ],
+                            ),
+                            CustomTextFormField(
+                              hintText: 'Password',
+                              isObsecureText: false,
+                              validator: AppValidators.validatePassword,
+                              icon: Icon(
+                                Icons.lock_outline_rounded,
+                                color: AppColors.onBackground,
+                              ),
+                              controller: _passwordController,
+                            ),
+                            CustomButton(
+                              txt: 'SIGN IN ',
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()){
+
+                                }
+                                else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('error')),
+                                  );
+                                }
+                              },
+                            ),
+                            SizedBox(height: 10),
+                            Center(
+                              child: Text(
+                                'OR CONTINUE WITH',
+                                style: AppTextStyles.bLabelSmall,
+                              ),
+                            ),
+                            CustomBtnOutlined(),
+                            SizedBox(height: 30),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'New to Aura? ',
+                                  style: AppTextStyles.bodyMedium,
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pushNamed(
+                                    context,
+                                    'SignUpScreen',
+                                  ),
+                                  child: Text(
+                                    'Request Membership ',
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Spacer(flex: 2),
-                        ],
+                              ],
+                            ),
+                            Spacer(flex: 2),
+                          ],
+                        ),
                       ),
                     ),
                   ),

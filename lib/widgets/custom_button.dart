@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String txt;
   final double? radius;
-  const CustomButton({super.key, required this.txt, this.radius = 12});
+  final void Function() onPressed;
+  const CustomButton({super.key, required this.txt, this.radius = 12, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius!),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
