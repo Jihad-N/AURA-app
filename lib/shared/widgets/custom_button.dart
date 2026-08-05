@@ -1,6 +1,6 @@
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
-import 'package:ecommerce_project/core/theme/constants.dart';
+import 'package:ecommerce_project/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {

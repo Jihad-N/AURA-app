@@ -1,10 +1,10 @@
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
-import 'package:ecommerce_project/widgets/aura_logo.dart';
-import 'package:ecommerce_project/widgets/custom_btn_outlined.dart';
-import 'package:ecommerce_project/widgets/custom_button.dart';
-import 'package:ecommerce_project/widgets/custom_text_field.dart';
+import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
+import 'package:ecommerce_project/shared/widgets/custom_btn_outlined.dart';
+import 'package:ecommerce_project/shared/widgets/custom_button.dart';
+import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {

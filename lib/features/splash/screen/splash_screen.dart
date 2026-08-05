@@ -1,8 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
-import 'package:ecommerce_project/screens/login_screen.dart';
-import 'package:ecommerce_project/widgets/splash_custom_image.dart';
+import 'package:ecommerce_project/features/auth/screens/login_screen.dart';
+import 'package:ecommerce_project/shared/widgets/splash_custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
