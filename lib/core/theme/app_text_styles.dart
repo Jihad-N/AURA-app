@@ -6,7 +6,7 @@ class AppTextStyles {
 
   static const TextStyle displayLarge = TextStyle(
     fontFamily: 'EB Garamond',
-    fontSize: 48,
+    fontSize: 40,
     fontWeight: FontWeight.w500,
     height: 56 / 48,
     color: AppColors.inverseSurface,
@@ -26,11 +26,11 @@ class AppTextStyles {
     height: 40 / 32,
     color: AppColors.darkPrimary,
   );
-   static const TextStyle headlineSmall = TextStyle(
+  static const TextStyle headlineSmall = TextStyle(
     fontFamily: 'EB Garamond',
     fontSize: 22,
     fontWeight: FontWeight.w500,
-    height: 28/22,
+    height: 28 / 22,
     color: AppColors.darkPrimary,
   );
   static const TextStyle blackHeadingSmall = TextStyle(
@@ -61,7 +61,7 @@ class AppTextStyles {
     fontFamily: 'Hanken Grotesk',
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    height:  16 / 12,
+    height: 16 / 12,
     color: AppColors.textSecondary,
   );
 
@@ -91,7 +91,7 @@ class AppTextStyles {
     letterSpacing: 0.6,
     color: AppColors.inverseSurface,
   );
-  
+
   static const TextStyle bLabelMedium = TextStyle(
     fontFamily: 'Hanken Grotesk',
     fontSize: 20,
@@ -108,6 +108,13 @@ class AppTextStyles {
     letterSpacing: 0.6,
     color: AppColors.inverseSurface,
   );
-  
-
+  static const TextStyle link = TextStyle(
+    fontFamily: 'Hanken Grotesk',
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    height: 16 / 12,
+    letterSpacing: 0.6,
+    color: AppColors.darkPrimary,
+    decoration: TextDecoration.underline,
+  );
 }

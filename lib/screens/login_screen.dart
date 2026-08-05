@@ -1,5 +1,6 @@
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
+import 'package:ecommerce_project/widgets/aura_logo.dart';
 import 'package:ecommerce_project/widgets/custom_btn_outlined.dart';
 import 'package:ecommerce_project/widgets/custom_button.dart';
 import 'package:ecommerce_project/widgets/custom_text_field.dart';
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                   Spacer(flex: 2),
                   Column(
                     children: [
-                      Text('Aura', style: AppTextStyles.headlineMedium),
+                      AuraLogo(),
                       Text(
                         'THE ART OF FINE HOROLOGY & JEWELRY',
                         style: AppTextStyles.bodyMedium,
@@ -94,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                               color: AppColors.onBackground,
                             ),
                           ),
-                          CustomButton(),
+                          CustomButton(txt: 'SIGN IN '),
                           SizedBox(height: 10),
                           Center(
                             child: Text(
@@ -111,16 +112,22 @@ class LoginScreen extends StatelessWidget {
                                 'New to Aura? ',
                                 style: AppTextStyles.bodyMedium,
                               ),
-                              Text(
-                                'Request Membership ',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontStyle: FontStyle.italic,
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(
+                                  context,
+                                  'SignUpScreen',
+                                ),
+                                child: Text(
+                                  'Request Membership ',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                          Spacer(flex: 2,),
+                          Spacer(flex: 2),
                         ],
                       ),
                     ),
