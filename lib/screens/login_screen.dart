@@ -104,6 +104,7 @@ class LoginScreen extends StatelessWidget {
                                 color: AppColors.onBackground,
                               ),
                               controller: _passwordController,
+                              sufIcon:Icon(Icons.remove_red_eye_outlined,color: AppColors.darkPrimary,)
                             ),
                             CustomButton(
                               txt: 'SIGN IN ',
