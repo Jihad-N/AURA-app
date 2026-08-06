@@ -58,7 +58,7 @@ class AppTextStyles {
   static const TextStyle bodyLarge = TextStyle(
     fontFamily: 'Hanken Grotesk',
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     height: 24 / 16,
     color: AppColors.textPrimary,
   );
@@ -108,8 +108,8 @@ class AppTextStyles {
   );
   static const TextStyle bLabelSmall = TextStyle(
     fontFamily: 'Hanken Grotesk',
-    fontSize: 12,
-    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
     height: 16 / 10,
     letterSpacing: 0.6,
     color: AppColors.inverseSurface,

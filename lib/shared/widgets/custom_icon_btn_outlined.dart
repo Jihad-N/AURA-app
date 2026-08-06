@@ -11,7 +11,8 @@ class CustomIconBtnOutlined extends StatelessWidget {
     return Center(
       child: Container(
         margin: EdgeInsets.only(top: 10),
-        width: 50,
+        width: 75,
+        height:75,
         decoration: BoxDecoration(
           color: AppColors.outlineVariant,
           borderRadius: BorderRadius.circular(50),
