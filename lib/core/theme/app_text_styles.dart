@@ -11,7 +11,13 @@ class AppTextStyles {
     height: 56 / 48,
     color: AppColors.inverseSurface,
   );
-
+  static const TextStyle wHeadlineMedium = TextStyle(
+    fontFamily: 'EB Garamond',
+    fontSize: 28,
+    fontWeight: FontWeight.w500,
+    height: 40 / 32,
+    color: AppColors.onPrimary,
+  );
   static const TextStyle headlineLarge = TextStyle(
     fontFamily: 'EB Garamond',
     fontSize: 40,
@@ -76,7 +82,7 @@ class AppTextStyles {
 
   static const TextStyle wLabelLarge = TextStyle(
     fontFamily: 'Hanken Grotesk',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 16 / 12,
     letterSpacing: 0.6,
@@ -102,7 +108,7 @@ class AppTextStyles {
   );
   static const TextStyle bLabelSmall = TextStyle(
     fontFamily: 'Hanken Grotesk',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 16 / 10,
     letterSpacing: 0.6,

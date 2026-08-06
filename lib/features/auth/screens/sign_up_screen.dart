@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
           width: double.infinity,
           color: AppColors.background,
           child: Column(

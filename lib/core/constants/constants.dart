@@ -8,10 +8,7 @@ const LinearGradient btnGradient = LinearGradient(
     
     AppColors.primary,
     AppColors.primaryContainer,
-    AppColors.primaryContainer,
-    AppColors.primary,
-    AppColors.primaryContainer,
-    AppColors.primary,
+    AppColors.darkPrimary,
     AppColors.inverseSurface,
     
   ],
