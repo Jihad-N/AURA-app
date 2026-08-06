@@ -22,16 +22,19 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    final dynamic rawName = json['name'] ?? json['title'];
+    final dynamic rawDiscount = json['discount'] ?? json['discountPercentage'];
+
     return ProductModel(
-      id: json["id"],
-      name: json["name"],
-      description: json["description"],
-      price: json["price"] ,
-      discount: json["discount"],
-      stock: json["stock"],
-      category: json["category"],
-      thumbnail: json["thumbnail"],
-      isFavorite: json["isFavorite"] ?? false,
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: rawName?.toString() ?? 'Product',
+      description: json['description']?.toString() ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      discount: (rawDiscount as num?)?.toDouble() ?? 0.0,
+      stock: (json['stock'] as num?)?.toInt() ?? 0,
+      category: json['category']?.toString() ?? 'unknown',
+      thumbnail: json['thumbnail']?.toString() ?? '',
+      isFavorite: json['isFavorite'] ?? false,
     );
   }
 
