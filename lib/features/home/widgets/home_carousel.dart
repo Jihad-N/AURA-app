@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/theme/size_config.dart';
@@ -49,9 +50,7 @@ class HomeCarousel extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.inverseSurface.withValues(
-                      alpha: 0.25,
-                    ),
+                    color: AppColors.inverseSurface.withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(28),
                   ),
                   child: Padding(
@@ -76,7 +75,12 @@ class HomeCarousel extends StatelessWidget {
                           duration: const Duration(milliseconds: 300),
                           child: CustomDarkTxtBtn(
                             txt: 'DISCOVER COLLECTION',
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                AppRoutes.productList,
+                              );
+                            },
                           ),
                         ),
                       ],

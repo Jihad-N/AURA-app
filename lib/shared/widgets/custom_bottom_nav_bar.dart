@@ -13,18 +13,21 @@ class CustomBottomNavBar extends StatelessWidget {
       selectedItemColor: AppColors.darkPrimary,
       unselectedItemColor: AppColors.textSecondary,
       items: [
-        BottomNavigationBarItem(label: 'home', icon: Icon(Icons.home_outlined)),
+        BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home_outlined)),
         BottomNavigationBarItem(
-          label: 'cart',
+          label: 'Cart',
           icon: Icon(Icons.shopping_bag_outlined),
+          activeIcon: Icon(Icons.shopping_bag),
         ),
         BottomNavigationBarItem(
-          label: 'favourite',
+          label: 'Favourites',
           icon: Icon(Icons.favorite_border),
+          activeIcon: Icon(Icons.favorite)
         ),
         BottomNavigationBarItem(
-          label: 'profile',
+          label: 'Profile',
           icon: Icon(Icons.person_2_outlined),
+          activeIcon: Icon(Icons.person_2)
         ),
       ],
       onTap: (int index) {
@@ -34,10 +37,10 @@ class CustomBottomNavBar extends StatelessWidget {
             Navigator.pushReplacementNamed(context, AppRoutes.home);
             break;
           case 1:
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
+            Navigator.pushReplacementNamed(context, AppRoutes.cart);
             break;
           case 2:
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
+            Navigator.pushReplacementNamed(context, AppRoutes.favorite);
             break;
           case 3:
             Navigator.pushReplacementNamed(context, AppRoutes.home);

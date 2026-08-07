@@ -1,17 +1,18 @@
+import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/features/home/widgets/home_carousel.dart';
 import 'package:ecommerce_project/features/products/models/product_model.dart';
 import 'package:ecommerce_project/features/products/widgets/product_card.dart';
-import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
+import 'package:ecommerce_project/shared/widgets/custom_app_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_icon_btn_outlined.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_project/features/products/services/product_services.dart';
 
-const apiK =
-    'sk-8fhT7E9zlZZN2ym9wIyxWANM6T1VNTOIy1sUAm7grxQUGAxXcSc64v4bR_iLavYi'
-    'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsQLvmHm2Kuh3+Wdt8WCepUl5ZPUOWkdC+b2l23JEltDo4sCq+8N3f3Hw59A1tGvY3HUm+zJWBk7uzEVP+kXIRqMTBZOqWHTO+6kcQ8bsdD9bXV0ZCRi5ZOECm+71lybz+37AxNhEIDr6kBfXApEzH9l+wGQuU5CQGfMB3zsiOWwIDAQAB';
+// const apiK =
+//     'sk-8fhT7E9zlZZN2ym9wIyxWANM6T1VNTOIy1sUAm7grxQUGAxXcSc64v4bR_iLavYi'
+//     'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsQLvmHm2Kuh3+Wdt8WCepUl5ZPUOWkdC+b2l23JEltDo4sCq+8N3f3Hw59A1tGvY3HUm+zJWBk7uzEVP+kXIRqMTBZOqWHTO+6kcQ8bsdD9bXV0ZCRi5ZOECm+71lybz+37AxNhEIDr6kBfXApEzH9l+wGQuU5CQGfMB3zsiOWwIDAQAB';
 
 class CollectionItem {
   final String title;
@@ -53,25 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
-      appBar: AppBar(
-        backgroundColor: AppColors.background,
-        leading: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: CircleAvatar(
-            radius: 25,
-            backgroundColor: AppColors.onBackground,
-            child: Icon(Icons.person, color: AppColors.primary),
-          ),
-        ),
-        title: AuraLogo(),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.notifications_none, color: AppColors.darkPrimary),
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -84,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPageChanged: (index) => setState(() => _currentIndex = index),
               ),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
                     Row(
@@ -107,7 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                CustomIconBtnOutlined(img: item.img),
+                                CustomIconBtnOutlined(
+                                  img: item.img,
+                                  onpressed: () {
+                                    Navigator.pushNamed(context, AppRoutes.productList);
+                                  },
+                                ),
                                 SizedBox(height: 10),
                                 Text(
                                   item.title,

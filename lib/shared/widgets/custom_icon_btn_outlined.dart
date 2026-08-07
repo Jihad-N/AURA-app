@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class CustomIconBtnOutlined extends StatelessWidget {
   final String img;
-
-  const CustomIconBtnOutlined({super.key, required this.img});
+  final Function() onpressed;
+  const CustomIconBtnOutlined({super.key, required this.img, required this.onpressed});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +12,14 @@ class CustomIconBtnOutlined extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: 10),
         width: 75,
-        height:75,
+        height: 75,
         decoration: BoxDecoration(
           color: AppColors.outlineVariant,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(color: AppColors.outline),
         ),
         child: TextButton(
-          onPressed: () {},
+          onPressed: onpressed,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [Image(image: AssetImage(img))],

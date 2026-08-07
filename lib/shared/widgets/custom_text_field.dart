@@ -10,7 +10,8 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.sufIcon,
     this.autoValidateMode = AutovalidateMode.onUserInteraction,
-    this.validator, required this.controller,
+    this.validator,
+    required this.controller, this.fillColor =Colors.white,
   });
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -20,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final Icon? sufIcon;
   final AutovalidateMode? autoValidateMode;
   final Function(String)? onChanged;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class CustomTextFormField extends StatelessWidget {
           prefixIcon: icon,
           suffixIcon: sufIcon,
           filled: true,
-          fillColor: Colors.white,
+          fillColor: fillColor,
           hintText: hintText,
           hintStyle: AppTextStyles.bodyMedium,
           border: OutlineInputBorder(

@@ -1,9 +1,8 @@
-
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final String image;
   final String title;
   final double price;
@@ -14,6 +13,12 @@ class ProductCard extends StatelessWidget {
     required this.price,
   });
 
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,13 +35,16 @@ class ProductCard extends StatelessWidget {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(topLeft:Radius.circular(16),topRight: Radius.circular(16)),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
                 child: Container(
                   height: 140,
                   width: double.infinity,
                   color: AppColors.surfaceContainerHighest,
                   child: Image.network(
-                    image,
+                    widget.image,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return const Center(
@@ -59,12 +67,16 @@ class ProductCard extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    icon: const Icon(
-                      Icons.favorite_border,
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
                       size: 16,
-                      color: AppColors.inverseSurface,
+                      color: isFavorite ? Colors.red : AppColors.inverseSurface,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isFavorite = !isFavorite;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -77,20 +89,23 @@ class ProductCard extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  title,
+                  widget.title,
                   style: AppTextStyles.bLabelSmall,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 const SizedBox(height: 4),
-                
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('$price', style: AppTextStyles.bLabelSmall),
+                        Text(
+                          '${widget.price}',
+                          style: AppTextStyles.bLabelSmall,
+                        ),
                         const SizedBox(width: 4),
                         // Text(
                         //   'was \$87.5',
@@ -102,7 +117,7 @@ class ProductCard extends StatelessWidget {
                         // ),
                       ],
                     ),
-                
+
                     Container(
                       width: 28,
                       height: 28,

@@ -1,6 +1,9 @@
 import 'package:ecommerce_project/features/auth/screens/login_screen.dart';
 import 'package:ecommerce_project/features/auth/screens/sign_up_screen.dart';
+import 'package:ecommerce_project/features/cart/screens/cart_screen.dart';
+import 'package:ecommerce_project/features/favorite/screens/favorite_screen.dart';
 import 'package:ecommerce_project/features/home/screen/home_screen.dart';
+import 'package:ecommerce_project/features/products/screens/product_list.dart';
 import 'package:ecommerce_project/features/splash/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +39,21 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
+        
+      case AppRoutes.productList:
+        return MaterialPageRoute(
+          builder: (_) =>  ProductList(),
+        );
 
+      case AppRoutes.favorite:
+        return MaterialPageRoute(
+          builder: (_) =>  FavoriteScreen(),
+        );
+      
+      case AppRoutes.cart:
+        return MaterialPageRoute(
+          builder: (_) =>  CartScreen(),
+        );
 
       default:
         return MaterialPageRoute(

@@ -7,7 +7,7 @@ class ProductModel {
   final int stock;
   final String category;
   final String thumbnail;
-  final bool isFavorite;
+   bool isFavorite;
 
   ProductModel({
     required this.id,
@@ -18,7 +18,7 @@ class ProductModel {
     required this.stock,
     required this.category,
     required this.thumbnail,
-    required this.isFavorite,
+     this.isFavorite =false,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {

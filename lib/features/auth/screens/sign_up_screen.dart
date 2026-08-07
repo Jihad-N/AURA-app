@@ -150,7 +150,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       CustomIconBtnOutlined(
-                        img: 'assets/images/Google-SVG.png',
+                        img: 'assets/images/Google-SVG.png', onpressed: () {},
                       ),
                     ],
                   ),
