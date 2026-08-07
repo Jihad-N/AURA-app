@@ -6,11 +6,15 @@ class ProductCard extends StatefulWidget {
   final String image;
   final String title;
   final double price;
+  final Icon icon;
+  final Function()? onFavPressed;
   const ProductCard({
     super.key,
     required this.image,
     required this.title,
     required this.price,
+    this.onFavPressed,
+    required this.icon,
   });
 
   @override
@@ -18,7 +22,15 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool isFavorite = false;
+  static bool isFavorite = false;
+
+  // void _favoritePressed() {
+  //   setState(() {
+  //     isFavorite = !isFavorite;
+  //   });
+  //   widget.onPressed?.call();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +70,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ),
               ),
-
+              //fav icon
               Positioned(
                 top: 8,
                 right: 8,
@@ -67,16 +79,8 @@ class _ProductCardState extends State<ProductCard> {
                   backgroundColor: Colors.white,
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      size: 16,
-                      color: isFavorite ? Colors.red : AppColors.inverseSurface,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isFavorite = !isFavorite;
-                      });
-                    },
+                    icon: widget.icon,
+                    onPressed: widget.onFavPressed,
                   ),
                 ),
               ),
