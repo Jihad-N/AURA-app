@@ -30,6 +30,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           activeIcon: Icon(Icons.favorite)
         ),
         BottomNavigationBarItem(
+          label: 'Add',
+          icon: Icon(Icons.add_box_outlined),
+          activeIcon: Icon(Icons.add_box)
+        ),
+        BottomNavigationBarItem(
           label: 'Profile',
           icon: Icon(Icons.person_2_outlined),
           activeIcon: Icon(Icons.person_2)
@@ -50,6 +55,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             });
             break;
           case 3:
+            Navigator.pushReplacementNamed(context, AppRoutes.addProduct);
+            break;
+          case 4:
             Navigator.pushReplacementNamed(context, AppRoutes.home);
             break;
         }

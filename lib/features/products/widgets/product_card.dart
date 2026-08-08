@@ -22,14 +22,6 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  static bool isFavorite = false;
-
-  // void _favoritePressed() {
-  //   setState(() {
-  //     isFavorite = !isFavorite;
-  //   });
-  //   widget.onPressed?.call();
-  // }
 
   @override
   Widget build(BuildContext context) {

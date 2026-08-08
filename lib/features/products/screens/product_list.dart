@@ -3,8 +3,8 @@ import 'package:ecommerce_project/features/favorite/screens/favorites_manager.da
 import 'package:ecommerce_project/features/products/models/product_model.dart';
 import 'package:ecommerce_project/features/products/services/product_services.dart';
 import 'package:ecommerce_project/features/products/widgets/product_card.dart';
-import 'package:ecommerce_project/shared/widgets/custom_app_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
+import 'package:ecommerce_project/shared/widgets/custom_simple_app_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +27,7 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: SimpleCustomAppBar(),
       bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
       body: SingleChildScrollView(
         child: Container(

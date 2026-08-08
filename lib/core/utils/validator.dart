@@ -24,8 +24,7 @@ class AppValidators {
       return 'Email is required';
     }
 
-    const emailPattern =
-        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    const emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
 
     if (!RegExp(emailPattern).hasMatch(value.trim())) {
       return 'Enter a valid email address';
@@ -64,16 +63,62 @@ class AppValidators {
   }
 
   /// Confirm Password Validator
-  static String? validateConfirmPassword(
-    String? value,
-    String password,
-  ) {
+  static String? validateConfirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
     }
 
     if (value != password) {
       return 'Passwords do not match';
+    }
+
+    return null;
+  }
+
+  // Price
+  static String? validatePrice(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Price is required';
+    }
+
+    final price = double.tryParse(value);
+
+    if (price == null) {
+      return 'Enter a valid price';
+    }
+
+    if (price <= 0) {
+      return 'Price must be greater than 0';
+    }
+
+    return null;
+  }
+
+  // Text
+  static String? validateText(
+    String? value, {
+    String fieldName = 'Field',
+    int minLength = 3,
+    int maxLength = 50,
+  }) {
+    if (value == null || value.trim().isEmpty) {
+      return '$fieldName is required';
+    }
+
+    final text = value.trim();
+
+    if (text.length < minLength) {
+      return '$fieldName must be at least $minLength characters';
+    }
+
+    if (text.length > maxLength) {
+      return '$fieldName must not exceed $maxLength characters';
+    }
+
+    final regex = RegExp(r"[a-zA-Z0-9\u0600-\u06FF\s.,!?:;()\-']");
+
+    if (!regex.hasMatch(text)) {
+      return '$fieldName contains invalid characters';
     }
 
     return null;

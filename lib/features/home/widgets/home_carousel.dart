@@ -76,7 +76,7 @@ class HomeCarousel extends StatelessWidget {
                           child: CustomDarkTxtBtn(
                             txt: 'DISCOVER COLLECTION',
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                 context,
                                 AppRoutes.productList,
                               );

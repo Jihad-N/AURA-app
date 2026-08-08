@@ -5,6 +5,7 @@ import 'package:ecommerce_project/core/utils/validator.dart';
 import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
 import 'package:ecommerce_project/shared/widgets/custom_btn_outlined.dart';
 import 'package:ecommerce_project/shared/widgets/custom_button.dart';
+import 'package:ecommerce_project/shared/widgets/custom_form_label.dart';
 import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             Spacer(),
                             SizedBox(height: 10),
-                            Text('Email', style: AppTextStyles.labelMedium),
+                            FormFieldLabel(text: 'Email'),
                             CustomTextFormField(
                               autoValidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -86,10 +87,7 @@ class LoginScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Password',
-                                  style: AppTextStyles.labelMedium,
-                                ),
+                                FormFieldLabel(text: 'Password'),
                                 Text(
                                   'Forgot?',
                                   style: AppTextStyles.headlineSmall,
@@ -105,15 +103,17 @@ class LoginScreen extends StatelessWidget {
                                 color: AppColors.onBackground,
                               ),
                               controller: _passwordController,
-                              sufIcon:Icon(Icons.remove_red_eye_outlined,color: AppColors.darkPrimary,)
+                              sufIcon: Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: AppColors.darkPrimary,
+                              ),
                             ),
                             CustomButton(
                               txt: 'SIGN IN ',
                               onPressed: () {
-                                if (_formKey.currentState!.validate()){
+                                if (_formKey.currentState!.validate()) {
                                   Navigator.pushNamed(context, AppRoutes.home);
-                                }
-                                else {
+                                } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text('error')),
                                   );

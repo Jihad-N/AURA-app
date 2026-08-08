@@ -11,7 +11,8 @@ class CustomTextFormField extends StatelessWidget {
     this.sufIcon,
     this.autoValidateMode = AutovalidateMode.onUserInteraction,
     this.validator,
-    required this.controller, this.fillColor =Colors.white,
+    required this.controller,
+    this.fillColor = Colors.white, this.keyboardtype,
   });
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -22,12 +23,14 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode? autoValidateMode;
   final Function(String)? onChanged;
   final Color? fillColor;
+  final TextInputType? keyboardtype;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0, top: 4),
       child: TextFormField(
+        keyboardType: keyboardtype,
         validator: validator,
         controller: controller,
         onChanged: onChanged,
