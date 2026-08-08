@@ -1,5 +1,7 @@
+import 'package:ecommerce_project/core/helper/show_success_snack_bar.dart';
 import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -64,7 +66,27 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             Navigator.pushReplacementNamed(context, AppRoutes.addProduct);
             break;
           case 4:
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
+            Navigator.push(
+              context,
+              MaterialPageRoute<ProfileScreen>(
+                builder: (context) => ProfileScreen(
+                  appBar: AppBar(title: const Text('User Profile')),
+                  actions: [
+                    SignedOutAction((context) {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(AppRoutes.login);
+                    }),
+                    AuthStateChangeAction<CredentialLinked>((context, state) {
+                      showSuccessSnackBar(
+                        context,
+                        'Provider sucessfully linked!',
+                      );
+                    }),
+                  ],
+                ),
+              ),
+            );
             break;
         }
       },

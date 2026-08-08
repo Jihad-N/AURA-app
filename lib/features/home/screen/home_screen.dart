@@ -1,6 +1,7 @@
 import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
+import 'package:ecommerce_project/features/auth/services/auth_service.dart';
 import 'package:ecommerce_project/features/favorite/screens/favorites_manager.dart';
 import 'package:ecommerce_project/features/home/widgets/home_carousel.dart';
 import 'package:ecommerce_project/features/products/models/product_model.dart';
@@ -11,10 +12,6 @@ import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_icon_btn_outlined.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_project/features/products/services/product_services.dart';
-
-// const apiK =
-//     'sk-8fhT7E9zlZZN2ym9wIyxWANM6T1VNTOIy1sUAm7grxQUGAxXcSc64v4bR_iLavYi'
-//     'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsQLvmHm2Kuh3+Wdt8WCepUl5ZPUOWkdC+b2l23JEltDo4sCq+8N3f3Hw59A1tGvY3HUm+zJWBk7uzEVP+kXIRqMTBZOqWHTO+6kcQ8bsdD9bXV0ZCRi5ZOECm+71lybz+37AxNhEIDr6kBfXApEzH9l+wGQuU5CQGfMB3zsiOWwIDAQAB';
 
 class CollectionItem {
   final String title;
@@ -32,6 +29,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+   final authService = AuthService();
+   
+  
   late Future<List<ProductModel>> _productsFuture;
 
   final List<String> _images = [
@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
       appBar: CustomAppBar(),

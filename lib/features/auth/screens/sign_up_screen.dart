@@ -1,8 +1,9 @@
+import 'package:ecommerce_project/core/helper/show_error_snack_bar.dart';
 import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
-import 'package:ecommerce_project/features/auth/screens/login_screen.dart';
+import 'package:ecommerce_project/features/auth/screens/sign_in%20_with_google.dart';
 import 'package:ecommerce_project/features/auth/services/auth_service.dart';
 import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
 import 'package:ecommerce_project/shared/widgets/custom_button.dart';
@@ -12,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -192,7 +193,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 12),
                       CustomIconBtnOutlined(
                         img: 'assets/images/Google-SVG.png',
-                        onpressed: () {},
+                        onpressed: () async {
+                          UserCredential? userCredential =
+                              await signInWithGoogle();
+                          if (userCredential != null) {
+                            Navigator.of(
+                              context,
+                            ).pushReplacementNamed(AppRoutes.home);
+                          } else {
+                            showErrorSnackBar(
+                              context,
+                              'Sign-in failed. Please try again.',
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

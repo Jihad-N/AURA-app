@@ -1,7 +1,9 @@
+import 'package:ecommerce_project/core/helper/show_error_snack_bar.dart';
 import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
+import 'package:ecommerce_project/features/auth/screens/sign_in%20_with_google.dart';
 import 'package:ecommerce_project/features/auth/services/auth_service.dart';
 import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
 import 'package:ecommerce_project/shared/widgets/custom_btn_outlined.dart';
@@ -61,8 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       }
     }
-
-    
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -166,7 +166,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: AppTextStyles.bLabelSmall,
                               ),
                             ),
-                            CustomBtnOutlined(),
+                            CustomBtnOutlined(
+                              onPressed: () async {
+                                UserCredential? userCredential =
+                                    await signInWithGoogle();
+                                if (userCredential != null) {
+                                  Navigator.of(
+                                    context,
+                                  ).pushReplacementNamed(AppRoutes.home);
+                                } else {
+                                  showErrorSnackBar(
+                                    context,
+                                    'Sign-in failed. Please try again. And check your connection',
+                                  );
+                                }
+                              },
+                            ),
                             SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -215,14 +230,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
-
-void showErrorSnackBar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.redAccent,
-      behavior: SnackBarBehavior.floating,
-    ),
-  );
 }
