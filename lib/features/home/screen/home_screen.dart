@@ -4,6 +4,7 @@ import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/features/favorite/screens/favorites_manager.dart';
 import 'package:ecommerce_project/features/home/widgets/home_carousel.dart';
 import 'package:ecommerce_project/features/products/models/product_model.dart';
+import 'package:ecommerce_project/features/products/screens/product_detail.dart';
 import 'package:ecommerce_project/features/products/widgets/product_card.dart';
 import 'package:ecommerce_project/shared/widgets/custom_app_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
@@ -145,28 +146,33 @@ class _HomeScreenState extends State<HomeScreen> {
                             final isFav = FavoritesManager.favoritesList.any(
                               (item) => item.id == product.id,
                             );
-                            return ProductCard(
-                              image: product.thumbnail,
-                              title: product.name,
-                              price: product.price,
-                              icon: Icon(
-                                isFav ? Icons.favorite : Icons.favorite_border,
-                                size: 16,
-                                color: isFav
-                                    ? Colors.red
-                                    : AppColors.inverseSurface,
-                              ),
-                              onFavPressed: () {
-                                setState(() {
-                                  if (isFav) {
-                                    FavoritesManager.favoritesList.removeWhere(
-                                      (item) => item.id == product.id,
-                                    );
-                                  } else {
-                                    FavoritesManager.favoritesList.add(product);
-                                  }
-                                });
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductDetail(product: product,)));
                               },
+                              child: ProductCard(
+                                image: product.thumbnail,
+                                title: product.name,
+                                price: product.price,
+                                icon: Icon(
+                                  isFav ? Icons.favorite : Icons.favorite_border,
+                                  size: 16,
+                                  color: isFav
+                                      ? Colors.red
+                                      : AppColors.inverseSurface,
+                                ),
+                                onFavPressed: () {
+                                  setState(() {
+                                    if (isFav) {
+                                      FavoritesManager.favoritesList.removeWhere(
+                                        (item) => item.id == product.id,
+                                      );
+                                    } else {
+                                      FavoritesManager.favoritesList.add(product);
+                                    }
+                                  });
+                                },
+                              ),
                             );
                           },
                         );

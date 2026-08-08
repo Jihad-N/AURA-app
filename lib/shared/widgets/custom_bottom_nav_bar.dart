@@ -15,10 +15,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
-      selectedItemColor: AppColors.darkPrimary,
+      selectedItemColor: AppColors.primary,
       unselectedItemColor: AppColors.textSecondary,
       items: [
-        BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home_outlined)),
+        BottomNavigationBarItem(
+          label: 'Home',
+          icon: Icon(Icons.home_outlined),
+          activeIcon: Icon(Icons.home),
+        ),
         BottomNavigationBarItem(
           label: 'Cart',
           icon: Icon(Icons.shopping_bag_outlined),
@@ -27,17 +31,17 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         BottomNavigationBarItem(
           label: 'Favourites',
           icon: Icon(Icons.favorite_border),
-          activeIcon: Icon(Icons.favorite)
+          activeIcon: Icon(Icons.favorite),
         ),
         BottomNavigationBarItem(
           label: 'Add',
           icon: Icon(Icons.add_box_outlined),
-          activeIcon: Icon(Icons.add_box)
+          activeIcon: Icon(Icons.add_box),
         ),
         BottomNavigationBarItem(
           label: 'Profile',
           icon: Icon(Icons.person_2_outlined),
-          activeIcon: Icon(Icons.person_2)
+          activeIcon: Icon(Icons.person_2),
         ),
       ],
       onTap: (int index) {
@@ -50,7 +54,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             Navigator.pushReplacementNamed(context, AppRoutes.cart);
             break;
           case 2:
-            Navigator.pushReplacementNamed(context, AppRoutes.favorite).then((_){
+            Navigator.pushReplacementNamed(context, AppRoutes.favorite).then((
+              _,
+            ) {
               setState(() {});
             });
             break;

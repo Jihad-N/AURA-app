@@ -2,6 +2,7 @@ import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
 import 'package:ecommerce_project/features/home/widgets/custom_dark_txt_btn.dart';
+import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_form_label.dart';
 import 'package:ecommerce_project/shared/widgets/custom_simple_app_bar.dart';
 import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
@@ -21,18 +22,14 @@ class _AddProductState extends State<AddProduct> {
   String? _selectedCategory;
   final List<String> _categoryOptions = ['Rings', 'Earings', 'Necklaces'];
   final List<String> _selectedMaterials = [];
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  final int currentIndex = 3;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: SimpleCustomAppBar(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: currentIndex),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: ConstrainedBox(
@@ -146,7 +143,8 @@ class _AddProductState extends State<AddProduct> {
                               enabled: false,
                               child: StatefulBuilder(
                                 builder: (context, menuSetState) {
-                                  final isSelected = _selectedMaterials.contains(option);
+                                  final isSelected = _selectedMaterials
+                                      .contains(option);
                                   return CheckboxListTile(
                                     title: Text(option),
                                     value: isSelected,
@@ -196,12 +194,16 @@ class _AddProductState extends State<AddProduct> {
                           hintText: 'Enter product description',
                         ),
                       ),
-                      Center(child: CustomDarkTxtBtn(txt: 'SAVE MASTERPIECE', onPressed: (){})),
+                      Center(
+                        child: CustomDarkTxtBtn(
+                          txt: 'SAVE MASTERPIECE',
+                          onPressed: () {},
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(height: 50,),
-                
+                SizedBox(height: 50),
               ],
             ),
           ),

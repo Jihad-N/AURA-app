@@ -2,9 +2,11 @@ import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/features/favorite/screens/favorites_manager.dart';
 import 'package:ecommerce_project/features/products/widgets/product_card.dart';
+import 'package:ecommerce_project/shared/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteScreen extends StatefulWidget {
+  
   const FavoriteScreen({super.key});
 
   @override
@@ -12,7 +14,7 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  //  void addToFavorateList(var value) {
+ final int currentIndex = 2;
   @override
   Widget build(BuildContext context) {
     final favList = FavoritesManager.favoritesList;
@@ -26,6 +28,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: currentIndex),
       body: Padding(
         padding: EdgeInsetsGeometry.all(16),
         child: favList.isEmpty
