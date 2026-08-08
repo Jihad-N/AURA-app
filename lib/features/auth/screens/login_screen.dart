@@ -2,21 +2,68 @@ import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
+import 'package:ecommerce_project/features/auth/services/auth_service.dart';
 import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
 import 'package:ecommerce_project/shared/widgets/custom_btn_outlined.dart';
 import 'package:ecommerce_project/shared/widgets/custom_button.dart';
 import 'package:ecommerce_project/shared/widgets/custom_form_label.dart';
 import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool _isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    Future logIn() async {
+      try {
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            _isLoading = true;
+          });
+          await AuthService().logIn(
+            email: _emailController.text,
+            password: _passwordController.text,
+          );
+          Navigator.pushNamed(context, AppRoutes.home);
+        } else {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('error')));
+        }
+      } on FirebaseAuthException catch (e) {
+        String errorMessage = "An unknown error occurred.";
+        if (e.code == 'weak-password') {
+          errorMessage = 'The password provided is too weak.';
+        } else if (e.code == 'email-already-in-use') {
+          errorMessage = 'The account already exists for that email.';
+        } else if (e.code == 'invalid-email') {
+          errorMessage = 'The email address is not valid.';
+        }
+        showErrorSnackBar(context, errorMessage);
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+
+    
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
@@ -109,16 +156,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             CustomButton(
-                              txt: 'SIGN IN ',
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.pushNamed(context, AppRoutes.home);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('error')),
-                                  );
-                                }
-                              },
+                              txt: _isLoading ? 'Loading...' : 'SIGN IN ',
+                              onPressed: _isLoading ? () {} : logIn,
                             ),
                             SizedBox(height: 10),
                             Center(
@@ -176,4 +215,14 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void showErrorSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.redAccent,
+      behavior: SnackBarBehavior.floating,
+    ),
+  );
 }

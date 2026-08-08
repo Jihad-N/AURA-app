@@ -38,6 +38,8 @@ dependencies:
   page_transition: ^2.2.2
   carousel_slider: ^5.1.2
   http: ^1.6.0
+  firebase_core: ^4.13.0
+  firebase_auth: ^6.5.7
 
 dev_dependencies:
   flutter_test:

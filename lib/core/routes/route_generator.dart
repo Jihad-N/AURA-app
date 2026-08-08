@@ -4,7 +4,6 @@ import 'package:ecommerce_project/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_project/features/favorite/screens/favorite_screen.dart';
 import 'package:ecommerce_project/features/home/screen/home_screen.dart';
 import 'package:ecommerce_project/features/products/screens/add_product.dart';
-import 'package:ecommerce_project/features/products/screens/product_detail.dart';
 import 'package:ecommerce_project/features/products/screens/product_list.dart';
 import 'package:ecommerce_project/features/splash/screen/splash_screen.dart';
 import 'package:flutter/material.dart';

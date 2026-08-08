@@ -2,23 +2,72 @@ import 'package:ecommerce_project/core/routes/app_routes.dart';
 import 'package:ecommerce_project/core/theme/app_colors.dart';
 import 'package:ecommerce_project/core/theme/app_text_styles.dart';
 import 'package:ecommerce_project/core/utils/validator.dart';
+import 'package:ecommerce_project/features/auth/screens/login_screen.dart';
+import 'package:ecommerce_project/features/auth/services/auth_service.dart';
 import 'package:ecommerce_project/shared/widgets/aura_logo.dart';
 import 'package:ecommerce_project/shared/widgets/custom_button.dart';
 import 'package:ecommerce_project/shared/widgets/custom_icon_btn_outlined.dart';
 import 'package:ecommerce_project/shared/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmController =
-      TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _nameController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    Future signUp() async {
+      final authService = AuthService();
+      try {
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            _isLoading = true;
+          });
+          await authService.signUp(
+            name: _nameController.text.trim(),
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+            confirmPassword: _passwordConfirmController.text,
+          );
+
+          Navigator.pushNamed(context, AppRoutes.home);
+        } else {
+          showErrorSnackBar(context, 'error');
+        }
+      } on FirebaseAuthException catch (e) {
+        String errorMessage = "An unknown error occurred.";
+        if (e.code == 'weak-password') {
+          errorMessage = 'The password provided is too weak.';
+        } else if (e.code == 'email-already-in-use') {
+          errorMessage = 'The account already exists for that email.';
+        } else if (e.code == 'invalid-email') {
+          errorMessage = 'The email address is not valid.';
+        }
+        showErrorSnackBar(context, errorMessage);
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -129,17 +178,9 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       CustomButton(
-                        txt: 'CREATE ACCOUNT ',
+                        txt: _isLoading ? 'Loading...' : 'CREATE ACCOUNT ',
                         radius: 25,
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, AppRoutes.home);
-                          } else {
-                            ScaffoldMessenger.of(
-                              context,
-                            ).showSnackBar(SnackBar(content: Text('error')));
-                          }
-                        },
+                        onPressed: _isLoading ? () {} : signUp,
                       ),
                       const SizedBox(height: 16),
                       Center(
@@ -150,7 +191,8 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       CustomIconBtnOutlined(
-                        img: 'assets/images/Google-SVG.png', onpressed: () {},
+                        img: 'assets/images/Google-SVG.png',
+                        onpressed: () {},
                       ),
                     ],
                   ),
